@@ -1,0 +1,48 @@
+.nav {
+    background-color: color(primary);
+    opacity: 90%;
+
+    &__logo {
+        width: 8em;
+    }
+
+    &__link {
+        font-family: 'Exo', sans-serif;
+        font-weight: 500;
+        font-size: 1rem;
+        color: color(accent); 
+
+        &:hover {
+            @include hover;
+        }
+
+        @media screen and (min-width: 992px) {
+            font-size: 1rem;
+        }
+
+        @media screen and (min-width:1200px) {
+            font-size: 1.4rem;
+        }
+    }
+
+    &__item {
+        padding: 0 .8em;
+    }
+
+    &__toggle {
+        width: 2em;
+    }
+}
+
+.dropdown__menu {
+    background: color(primary);
+    border: none;
+}
+
+.dropdown__item {
+    color: color(accent);
+}
+
+.dropdown__center {
+    text-align: center;
+}

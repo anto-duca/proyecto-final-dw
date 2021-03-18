@@ -1,0 +1,108 @@
+.flex-container {
+    display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+    text-align: center;
+    padding: 1em 0;
+
+    @media only screen and (min-width: 992px) {
+        display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    img {
+        margin: auto;
+
+        @media only screen and (min-width: 992px) {
+            margin: 0;
+        }
+    }
+
+    &__item {
+        max-width: $max-width-text-sm;
+        padding: 1.5em 0;
+        margin: auto;
+
+        @media only screen and (min-width: 992px) {
+            margin: 0;
+            padding: 1em;
+            max-width: $max-width-text-lg;
+        }
+
+        @media only screen and (min-width: 1200px) {
+            padding: .5em;
+            max-width: $max-width-text-xl;
+        }
+    }
+
+    &__text {
+        margin-bottom: 0;
+        padding: 1em;
+
+        @media only screen and (min-width: 992px) {
+            padding: 1em 0;
+        }    
+    }
+
+    &__img {
+        border-radius: 50%;
+
+        @media only screen and (min-width: 1200px) {
+            max-width: 200px;
+        }
+    }
+}
+
+.presentation__item {
+    padding: 1em 0;
+    max-width: $max-width-text-sm;
+    margin: auto;
+
+    @media only screen and (min-width: 992px) {
+        margin: 0;
+        text-align: left;
+        padding: 1em;
+        max-width: 600px;
+    }
+}
+
+.blog-article__title {
+    margin-bottom: 1em;
+    max-width: $max-width-text-sm;
+
+    @media only screen and (min-width: 992px) {
+        margin-bottom: .6em;
+        max-width: $max-width-text-lg;
+    }
+
+    @media only screen and (min-width: 1200px) {
+        min-height: 140px;
+    }
+}
+
+.review {
+    background-color: color(primary-light);
+    border-radius: 5%;
+    margin: .5em auto;
+
+    @media only screen and (min-width:567px) {
+        padding: 1em;
+    }
+
+    @media only screen and (min-width:992px) {
+        display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+        margin: .5em 1em;
+    }
+
+    &__text {
+        padding: 1em;
+        margin: auto;
+        max-width: 300px;
+    }
+}

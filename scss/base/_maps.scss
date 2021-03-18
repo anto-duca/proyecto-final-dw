@@ -1,0 +1,24 @@
+$colors: (
+    primary: #fffbb6,
+    primary-light: lighten(#fffbb6, 10),
+    accent: #4e287f,
+    accent-light: lighten(#4e287f, 60),
+    accent-dark: darken(#4e287f, 10),
+    button: #ffffffea,
+);
+
+$sections: (
+    "highlighted-yellow": map-get($colors, primary-light),
+    "highlighted-purple": map-get($colors, accent-light)
+);
+
+@each $name, $value in $sections {
+    .#{$name} {
+        background-color: $value;
+    }
+}
+
+@function color ($color-name) {
+    @return map-get($colors, $color-name)
+}
+

@@ -1,0 +1,46 @@
+@mixin hover {
+    color: color(primary);
+    background: color(accent);
+    border-radius: .3em;
+    transition: all .7s;
+}
+
+@mixin btn {
+    padding: .7em 1em;
+    min-width: 205px;
+    min-height: 50px;
+    background: color(accent);
+    border-radius: .5em;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+}
+
+@mixin btn__text {
+    font-family: 'Exo', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: .07rem;
+    color: color(button);
+}
+
+@mixin btn--primary {
+    padding: .7em 1em;
+    min-width: 205px;
+    min-height: 50px;
+    border: 1px solid color(accent);
+    border-radius: .5em;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+}
+
+@mixin btn__text--primary {
+    font-family: 'Exo', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: .07rem;
+    color: color(accent);
+}

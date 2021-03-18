@@ -1,0 +1,51 @@
+.contact-container {
+    display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+    text-align: center;
+    background-color: color(accent-light);
+
+    &__intro {
+        text-align: center;
+
+        h4 {
+            padding: 1em 0;
+        }
+
+        ul {
+            padding: 0em;
+        }
+
+        li {
+            padding: .5em;
+        }
+
+        .iconify {
+            color: color(accent);
+        }
+    }
+
+    &__form {
+    border: 1px solid color(accent);
+    border-radius: 0.1875em;
+    padding: 1em;
+    margin: auto;
+
+        @media only screen and (min-width:768px){
+            padding: 2em 5em;
+        }
+    }
+}
+
+.btn--form {
+    background-color: color(primary);
+    color: color(accent);
+    display: block;
+    margin: .5em 0;
+    width: 100%;
+
+    &:hover {
+        color: color(accent);
+    }
+}
