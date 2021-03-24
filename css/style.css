@@ -101,8 +101,8 @@ h4 {
   color: #4e287f; }
 
 .heartbeat {
-  -webkit-animation: heartbeat 2s ease-in-out 1s infinite both;
-  animation: heartbeat 2s ease-in-out 1s infinite both; }
+  -webkit-animation: heartbeat 2s ease-in-out 3 both;
+  animation: heartbeat 2s ease-in-out 3 both; }
 
 @-webkit-keyframes heartbeat {
   from {
