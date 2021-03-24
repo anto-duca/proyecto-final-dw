@@ -24,6 +24,7 @@
     }
 
     &__btn {
+        margin-top: 1em;
         width: 100%;
 
         @media only screen and (min-width: 992px) {
@@ -32,16 +33,24 @@
     }
 
     &__form {
+        @media only screen and (min-width: 768px) {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
         @media only screen and (min-width: 992px) {
             display: flex;
                 flex-flow: row wrap;
                 align-items: center;
+            margin: 0;
+            max-width: 100%;
         }
     }
 }
 
 label {
 	display: flex;
+        align-items: center;
 
     @media only screen and (min-width:567px) {
         min-width: 500px;
