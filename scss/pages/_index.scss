@@ -36,7 +36,15 @@
             padding: .5em;
             max-width: $max-width-text-xl;
         }
-}
+
+        & a img {
+            transition: .3s;
+        }
+
+        & a img:hover{
+            transform: scale(1.1);
+        }
+    }
 
     &__text {
         margin-bottom: 0;
