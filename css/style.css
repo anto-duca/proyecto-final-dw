@@ -101,7 +101,7 @@ h4 {
   color: #4e287f; }
 
 .btn:hover {
-  color: #fffbb6;
+  color: #fff437;
   background: #361c58;
   border-radius: .3em;
   transition: all 1s; }
@@ -243,7 +243,7 @@ textarea {
     font-size: 1rem;
     color: #4e287f; }
     .nav__link:hover {
-      color: #fffbb6;
+      color: #fff437;
       background: #361c58;
       border-radius: .3em;
       transition: all 1s; }
@@ -269,7 +269,7 @@ textarea {
 .dropdown__item {
   color: #4e287f; }
   .dropdown__item:hover {
-    color: #fffbb6;
+    color: #fff437;
     background: #361c58;
     border-radius: .3em;
     transition: all 1s; }
@@ -661,7 +661,7 @@ textarea {
   margin: .5em 0;
   width: 100%; }
   .btn--form:hover {
-    color: #fffbb6;
+    color: #fff437;
     background: #361c58;
     border-radius: .3em;
     transition: all 1s; }

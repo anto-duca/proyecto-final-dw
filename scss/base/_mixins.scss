@@ -1,5 +1,5 @@
 @mixin hover {
-    color: color(primary);
+    color: color(primary-dark);
     background: color(accent-dark);
     border-radius: .3em;
     transition: all 1s;
