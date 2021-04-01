@@ -44,7 +44,7 @@
             max-width: 130px;
             
             @media only screen and (min-width:768px) {
-                max-width: 170px;
+                max-width: 150px;
             }
         }
 
@@ -60,7 +60,7 @@
             color: color(primary);
 
             @media only screen and (min-width:768px) {
-                font-size: 2rem;
+                font-size: 1.7rem;
             }
 
             @media only screen and (min-width: 1024px) {

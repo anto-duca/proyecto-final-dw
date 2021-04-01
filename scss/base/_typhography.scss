@@ -50,7 +50,11 @@ h3 {
 
 h4 {
     @extend h1;
-    font-family: 'Exo', sans-serif;
-    font-size: 1.25rem;
     margin-bottom: 0;
+    font-family: 'Exo', sans-serif;
+    font-size: 1.2rem;
+
+    @media only screen and (min-width: 992px) {
+        font-size: 1.5rem;
+    }
 }

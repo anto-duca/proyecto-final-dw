@@ -64,6 +64,10 @@
             font-size: 1rem;
             font-weight: 500;
             color: color(accent);
+
+            @media only screen and (min-width:992px) {
+                font-size: 1.2rem;
+            }
         }
 
         p {

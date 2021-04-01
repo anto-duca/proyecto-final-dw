@@ -9,7 +9,7 @@
 }
 
 .btn:hover {
-        color: color(primary);
+        @include hover;
 }
 
 .btn--primary:hover {

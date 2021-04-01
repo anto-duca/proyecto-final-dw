@@ -1,8 +1,8 @@
 @mixin hover {
     color: color(primary);
-    background: color(accent);
+    background: color(accent-dark);
     border-radius: .3em;
-    transition: all .7s;
+    transition: all 1s;
 }
 
 @mixin btn {
@@ -11,7 +11,7 @@
     min-height: 50px;
     background: color(accent);
     border-radius: .5em;
-    box-shadow: 0 10px 25px rgba(0,0,0,.2);
+    box-shadow: 0 10px 15px rgba(0,0,0,.2);
 }
 
 @mixin btn__text {

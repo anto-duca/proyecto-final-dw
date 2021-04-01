@@ -8,7 +8,7 @@
 
     @media only screen and (min-width: 992px) {
         display: flex;
-            flex-flow: row nowrap;
+            flex-direction: row;
             justify-content: center;
             align-items: center;
     }
@@ -28,13 +28,13 @@
         width: 100%;
 
         @media only screen and (min-width: 992px) {
+            margin-top: 0;
             margin-left: .5em;
         }
     }
 
     &__form {
         @media only screen and (min-width: 768px) {
-            max-width: 650px;
             margin: 0 auto;
         }
 
@@ -54,10 +54,6 @@ label {
 
     @media only screen and (min-width:567px) {
         min-width: 500px;
-    }
-
-    @media only screen and (min-width:1200px) {
-        min-width: 700px;
     }
 }
 

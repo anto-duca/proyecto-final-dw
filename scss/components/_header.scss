@@ -38,12 +38,16 @@
 .dropdown__menu {
     background: color(primary);
     border: none;
+    text-align: center;
+    @media only screen and (min-width:992px) {
+        text-align: left;
+    }
 }
 
 .dropdown__item {
     color: color(accent);
-}
 
-.dropdown__center {
-    text-align: center;
+    &:hover {
+        @include hover;
+    }
 }
