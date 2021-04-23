@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio | Lic. Sofia Duca Nutricionista</title>
-    <meta name="description" content="¿Buscas adoptar hábitos alimenticios saludables y sentís que es muy difícil conseguirlo?, aquí encontrarás todo lo necesario para lograrlo.">
+    <title>Recetarios | Lic. Sofia Duca Nutricionista</title>
+    <meta name="description" content="Para adoptar hábitos alimenticios saludables te propongo 3 maneras de lograrlo: consulta online, consulta presencial o a tu ritmo con los planes alimentarios.">
     <meta name="keywords" content="dieta equilibrada, nutricionista online, buena alimentacion, nutricionista, nutricion deportiva, alimentacion balanceada">
     <link rel="icon" href="multimedia/flavicon.png" sizes="16x16" type="image/png">
     <!-- iconify -->
@@ -18,9 +17,7 @@
     <!-- mi css -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-
     <header>
         <nav class="navbar navbar-expand-lg fixed-top nav">
             <div class="container-fluid">
@@ -66,87 +63,56 @@
         </nav>
 
         <section class="hero">
-            <h1>Adoptar hábitos alimenticios saludables nunca fue tan fácil</h1>
-            <a href="servicios.html" class="btn"><span class="btn__text">¿Empezamos?</span></a>
+            <h1>Elegí la mejor opción para vos...</h1>
         </section>
     </header>
 
     <main>
-        <!-- presentación -->
-        <section class="flex-container">
-            <img src="multimedia/sofia.jpg" alt="Sofia Duca Nutricionista">
-        
-            <div class="presentation__item">
-                <h2>Hola, soy Sofía</h2>
-                <p class="flex-container__text">Licenciada en Nutrición de la Universidad de Buenos. En esta web voy a darte consejos para ayudarte a que adoptes hábitos alimenticios saludables, de una manera fácil y divertida.
-                </p>
-            </div>
+        <!-- introducción blog -->
+        <section class="shop-introduction">
+            <h2>Bienvenido a mi tienda online</h2>
+            <p>No elijas la dieta del momento, elegí un estilo de vida que puedas mantener para siempre.</p>
         </section>
 
-        <!-- servicios -->
-        <section class="flex-container highlighted-purple">
-            <article class="flex-container__item">
-                <a href="servicios.html"><img src="multimedia/consultas-presenciales.jpg" alt="Consultas presenciales"></a>
-                <h3 class="flex-container__title">Consultas presenciales</h3>
-                <p class="flex-container__text"> Evaluación en consultorio, antopometría y seguimiento de tu composición corporal.</p>
-                <a href="servicios.html" class="btn"><span class="btn__text">Lee más</span></a>
-            </article>
-
-            <article class="flex-container__item">
-                <a href="servicios.html"><img src="multimedia/consultas-online.jpg" alt="Consultas online"></a>
-                <h3>Consultas online</h3>
-                <p class="flex-container__text">Entrevista online, seguimiento por fotos y mediciones simples realizadas en casa.</p>
-                <a href="servicios.html" class="btn"><span class="btn__text">Lee más</span></a>
-            </article>
-
-            <article class="flex-container__item">
-                <a href="servicios.html"><img src="multimedia/planes-alimentarios.jpg" alt="Planes alimentarios"></a>
-                <h3>Planes alimentarios</h3>
-                <p class="flex-container__text">Comprá el recetario, que más se ajuste a tus necesidades y hacelo a tu ritmo.</p>
-                <a href="servicios.html" class="btn"><span class="btn__text">Lee más</span></a>
-            </article>
+        <!-- selector desplegable -->
+        <section class="select-container">
+            <select name="select" class="select">
+                <option selected>Elegí la categoría</option>
+                <option value="planes">Planes Alimentarios</option>
+                <option value="consultas online">Consultas Online</option>
+                <option value="consultas presenciales">Consultas Presenciales</option>
+            </select>
         </section>
 
-        <!-- blog -->
-        <section class="flex-container">
-            <article class="flex-container__item">
-                <a href="blog.html"><img src="multimedia/ayuno-intermitente.jpg" alt="Ayuno intermitente"></a>
-                <div>
-                    <h3 class="blog-article__title">Ayuno intermitente para adelgazar. ¿Da resultados?</h3>
-                    <a href="blog.html" class="btn--primary"><span class="btn__text">Lee más</span></a>
-                </div>
+        <!-- contenido blog -->
+        <section class="shop-container">
+            <article class="shop-container__item">
+                <img src="multimedia/pancakes-desayuno.jpg" alt="pancakes para el desayuno">
+                <h3>Plan Anual</h3>
+                <href="#" class="btn"><span class="btn__text">Comprar</span></a>
             </article>
 
-            <article class="flex-container__item">
-                <a href="blog.html"><img src="multimedia/alimentacion-saludable.jpg" alt="Alimentación saludable"></a>
-                <div>
-                    <h3 class="blog-article__title"> Los mejores consejos para una alimentación saludable</h3>
-                    <a href="blog.html" class="btn--primary"><span class="btn__text">Lee más</span></a>
-                </div>
+            <article class="shop-container__item">
+                <img src="multimedia/nutricion-infantil.jpg" alt="nutrición infantil">
+                <h3>Plan Mensual</h3>
+                <href="#" class="btn"><span class="btn__text">Comprar</span></a>
             </article>
 
-            <article class="flex-container__item">
-                <a href="blog.html"><img src="multimedia/dieta-saludable.jpg" alt="Dieta saludable"></a>
-                <div>
-                    <h3 class="blog-article__title">Tips para una dieta saludable ideal para cuando falta tiempo</h3>
-                    <a href="blog.html" class="btn--primary"><span class="btn__text">Lee más</span></a>
-                </div>
+            <article class="shop-container__item">
+                <img src="multimedia/maternidad.jpg" alt="nutrición y maternidad">
+                <h3>Plan Semanal</h3>
+                <href="#" class="btn"><span class="btn__text">Comprar</span></a>
             </article>
         </section>
 
-        <!-- reseñas -->
-        <section class="flex-container">
-            <div class="review">
-                <img src="multimedia/mujer.jpg" class="review__img" alt="reseña">
-                <p class="review__text">"Sofía me ayudó a comer bien y sano, con opciones también para esos días en que no paro, ¡Gracias Sofi!."</p>
-                <p class="review__name">- Sonia</p>
-            </div>
-
-            <div class="review">
-                <img src="multimedia/pareja.jpg" class="review__img" alt="reseña">
-                <p class="review__text">"Nos sentimos más jóvenes que nunca, no pensamos que la alimentación podía ayudarnos a sentirnos mejor, gracias."</p>
-                <p class="review__name">- Juan y Marta</p>
-            </div>
+        <!-- pagination -->
+        <section>
+            <ul class="pagination">
+                <li><a href="#" class="active">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+            </ul>
         </section>
     </main>
 
@@ -166,7 +132,7 @@
                     <input type="email" name="email" id="email" placeholder="Correo electrónico" required>
                 </div>
 
-                <div> 
+                <div>
                     <input type="submit" value="Suscribirme" class="btn btn__text footer-newsletter__btn">
                 </div>
             </form>
@@ -191,8 +157,5 @@
         </section>
     </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-
 </body>
-
 </html>

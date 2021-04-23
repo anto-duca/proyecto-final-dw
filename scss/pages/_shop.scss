@@ -1,0 +1,61 @@
+.shop-introduction {
+    margin: 0 auto;
+    width: 90%;
+    text-align: center;
+
+    @media only screen and (min-width:992px) {
+        text-align: left;
+    }
+}
+
+// main content
+.shop-container {
+    display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+    padding: .5em 0;
+    text-align: center;
+    
+    @media only screen and (min-width: 768px) {
+        display: grid;
+            place-items: center;
+            grid-gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+
+    @media only screen and (min-width: 992px) {
+        display: grid;
+            place-items: center;
+            grid-gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+
+    @media only screen and (min-width: 1400px) {
+        display: grid;
+            place-items: center;
+            grid-gap: 1rem;
+            grid-template-columns: repeat(3, minmax(350px, 1fr));
+    }
+
+    &__item {
+        padding: 2em 0;
+    }
+}
+
+.pagination {
+    display: flex;
+        flex-direction: row;
+        justify-content: center;
+    margin: 3em 0;
+
+    a.active {
+        background-color: color(accent);
+        color: color(button);
+        border-radius: 5px;
+    }
+
+    a {
+        padding: .75em 1em;
+        color: color(accent);
+    }
+}
