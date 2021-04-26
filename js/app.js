@@ -7,15 +7,6 @@ class Plan {
         this.nombre = nombre;
         this.precio = precio;
     }
-    
-    descuento () {
-        if (this.precio === 190) {
-            alert('Promo por tiempo limitado: El plan anual tiene un descuento especial del 5%');
-            return this.precio - ((this.precio*5)/100);
-        } else {
-            return this.precio;
-        }
-    }
 }
 
 const PLAN_SEMANAL = new Plan (1, 'Plan semanal', 20);
@@ -27,7 +18,6 @@ const PRODUCTOS = [PLAN_SEMANAL, PLAN_MENSUAL, PLAN_ANUAL];
 let carrito = [];
 
 // Comprobación nombre usuario
-
 const USUARIO_LOCAL_STORAGE = localStorage.getItem('usuario');
 let usuario;
 
@@ -81,10 +71,9 @@ AGREGAR_AL_CARRITO();
 
 //Funcion para calcular el subtotal, antes de descuentos y cuotas
 const SUBTOTAL_USUARIO = () => {
-    // let subtotal = carrito.reduce( ( acumulador, elemento )=> acumulador += elemento.precio, 0 );
     let subtotal = 0;
     carrito.forEach(elemento => {
-        subtotal += elemento.descuento();
+        subtotal += elemento.precio;
     });
     alert(`'El total parcial de tu compra es: ' ${subtotal}`);
     console.log(subtotal)
