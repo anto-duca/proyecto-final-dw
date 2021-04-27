@@ -7,11 +7,21 @@ class Plan {
         this.nombre = nombre;
         this.precio = precio;
     }
+
+    descuento () {
+        if (this.precio >= 190) {
+            this.precio = (this.precio - ((this.precio*5)/100));
+        } else {
+            this.precio = this.precio;
+        }
+    }
 }
 
 const PLAN_SEMANAL = new Plan (1, 'Plan semanal', 20);
 const PLAN_MENSUAL = new Plan (2, 'Plan mensual', 40);
 const PLAN_ANUAL = new Plan (3, 'Plan anual', 190);
+
+PLAN_ANUAL.descuento();
 
 // Creación de arrays PRODUCTOS y CARRITO para el proceso de compra del usuario
 const PRODUCTOS = [PLAN_SEMANAL, PLAN_MENSUAL, PLAN_ANUAL];
