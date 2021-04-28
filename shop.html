@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/style.css">
 
     <!-- mi JS -->
+    <script src="/js/objects.js" defer></script>
     <script src="/js/app.js" defer></script>
 
     <!-- Bootstrap JS -->
@@ -86,32 +87,35 @@
         <!-- selector desplegable -->
         <section class="select-container">
             <select name="select" class="select">
-                <option selected>Elegí la categoría</option>
-                <option value="planes">Planes Alimentarios</option>
-                <option value="consultas online">Consultas Online</option>
-                <option value="consultas presenciales">Consultas Presenciales</option>
+                <option selected>Todos los servicios</option>
+                <option onclick="filtrar()" value="planes">Planes Alimentarios</option>
+                <option onclick="filtrar()" value="online">Consultas Online</option>
+                <option onclick="filtrar()" value="presenciales">Consultas Presenciales</option>
             </select>
         </section>
 
         <!-- contenido blog -->
         <section class="shop-container">
-            <article class="shop-container__item">
+            <!-- <article class="shop-container__item">
                 <img src="multimedia/pancakes-desayuno.jpg" alt="pancakes para el desayuno">
                 <h3>Plan Anual</h3>
+                <p>Descripción</p>
                 <href="#" class="btn"><span class="btn__text">Comprar</span></a>
             </article>
 
             <article class="shop-container__item">
                 <img src="multimedia/nutricion-infantil.jpg" alt="nutrición infantil">
                 <h3>Plan Mensual</h3>
+                <p>Descripción</p>
                 <href="#" class="btn"><span class="btn__text">Comprar</span></a>
             </article>
 
             <article class="shop-container__item">
                 <img src="multimedia/maternidad.jpg" alt="nutrición y maternidad">
                 <h3>Plan Semanal</h3>
+                <p>Descripción</p>
                 <href="#" class="btn"><span class="btn__text">Comprar</span></a>
-            </article>
+            </article> -->
         </section>
 
         <!-- pagination -->
@@ -167,4 +171,5 @@
     </footer>
 
 </body>
+
 </html>

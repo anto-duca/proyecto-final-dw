@@ -41,21 +41,3 @@
         padding: 2em 0;
     }
 }
-
-.pagination {
-    display: flex;
-        flex-direction: row;
-        justify-content: center;
-    margin: 3em 0;
-
-    a.active {
-        background-color: color(accent);
-        color: color(button);
-        border-radius: 5px;
-    }
-
-    a {
-        padding: .75em 1em;
-        color: color(accent);
-    }
-}
