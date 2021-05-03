@@ -104,6 +104,7 @@ const ELIMINAR_SERVICIO = (id) => {
     let productoEliminado = carrito.find (el => el.id == id);
     let indice = carrito.indexOf(productoEliminado);
     carrito.splice(indice, 1);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
     ACTUALIZAR_CARRITO();
 }
 
@@ -140,6 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
         carrito 
         CONTADOR.innerText = carrito.length;
     }
-    
+
     LOCAL_STORAGE();
 })
