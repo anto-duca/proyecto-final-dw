@@ -8,6 +8,86 @@
     }
 }
 
+// modal carrito 
+.modal-contenedor {
+    position: fixed;
+    top: 0;
+    display: flex;
+        justify-content: center;
+        align-items: center;
+    width: 100%;
+    height: 100vh;
+    visibility: hidden;
+    transition: all .5s;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-activo {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-carrito {
+    position: relative;
+    min-width: 500px;
+    padding: 2em;
+    margin-top: -100%;
+    transition: all .5s;
+    background: color(button);
+
+        .btn {
+            display: inline-block;
+            margin: 1em;
+        }
+
+        .precio-producto {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+}
+
+.modal-activo .modal-carrito {
+    margin-top: 0;
+}
+
+#carritoCerrar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: color(accent-dark);
+    border: none;
+    background-color: transparent;
+}
+
+.producto-carrito {
+    display: grid;
+        grid-template-columns: repeat(4, minmax(200px, 1fr));
+        grid-template-rows: repeat(1, minmax(min-content, 1fr));
+        column-gap: 1em;
+        justify-items: center;
+        align-items: center;
+    margin: 1em 0;
+}
+
+.contador-carrito { 
+    position: relative;
+        top: -13px;
+        left: -28px;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    background: color(accent-dark);
+    border-radius: 50%;
+    color: color(primary);
+    text-decoration: none;
+}
+
+.icono-carrito {
+    font-size: 2.5rem;
+}
+
 // main content
 .shop-container {
     display: flex;
@@ -20,7 +100,7 @@
         display: grid;
             place-items: center;
             grid-gap: 1rem;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     }
 
     @media only screen and (min-width: 992px) {
@@ -38,6 +118,21 @@
     }
 
     &__item {
-        padding: 2em 0;
+        padding: 2em 0.5em; 
+        width: 350px;
+
+        @media only screen and (min-width: 576px) {
+            width: 384px;
+        }
+
+        @media only screen and (min-width: 576px) {
+            width: 384px;
+        }
+    }
+
+    &__precio {
+        font-size: 1.5rem;
+        font-weight: 600;
     }
 }
+

@@ -4,7 +4,7 @@
     box-shadow: 0px 5px 10px -9px #302f2f;
 
     &__logo {
-        width: 8em;
+        width: 7em;
     }
 
     &__link {
@@ -50,4 +50,17 @@
     &:hover {
         @include hover;
     }
+}
+
+// Header shop
+.icon-shop {
+    font-size: 2rem;
+    color: color(accent-dark);
+    cursor: pointer;
+}
+
+.text-shop {
+    padding-left: .5em;
+    text-transform: uppercase;
+    color: color(accent-dark);
 }

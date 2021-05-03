@@ -1,125 +1,145 @@
-const CARRITO_LOCAL_STORAGE = JSON.parse( localStorage.getItem('carrito') );
 
-// Creación de arrays PRODUCTOS y CARRITO para el proceso de compra del usuario
+const CONTENEDOR = document.getElementById('servicios');
+const FILTRO_SHOP = document.getElementById('categoria');
+const AGREGAR_CARRITO = document.getElementById('agregarAlCarrito');
+const CONTENEDOR_MODAL = document.getElementsByClassName('modal-contenedor')[0];
+const BTN_ABRIR_CARRITO = document.getElementById('botonAbrir');
+const BTN_CERRAR_CARRITO = document.getElementById('carritoCerrar');
+const MODAL_CARRITO = document.getElementsByClassName('modal-carrito')[0];
+const CONTENEDOR_CARRITO = document.getElementById('contenedor-carrito');
+const PRECIO_TOTAL = document.getElementById('precioTotal');
+const CONTADOR = document.getElementById('contadorCarrito');
+
+// Creación de arrays CARRITO para el proceso de compra del usuario
 let carrito = [];
 
-const contenedor = document.getElementById('shop-container');
+// Función para imprimir los productos del local storage en el modal del carrito
+let carritoLocal = JSON.parse(localStorage.getItem('carrito'));
+
+const LOCAL_STORAGE = () => {
+
+    if (carritoLocal != null) {
+        carritoLocal.forEach ( (servicios) => {
+            let div = document.createElement('div');
+            div.classList.add('producto-carrito');
+    
+            div.innerHTML = `
+                <p>${servicios.nombre}</p>
+                <p>$ ${servicios.precio}</p>
+                <p>Cantidad: 1</p>
+                <a href="#" onclick=ELIMINAR_SERVICIO(${servicios.id})><span class="iconify" data-icon="bi:trash" data-inline="false"></span></a>
+            `
+            CONTENEDOR_CARRITO.appendChild(div)
+        })
+
+        PRECIO_TOTAL.innerText = carritoLocal.reduce( (acc, el) => acc += el.precio, 0 );
+    }
+
+    return carritoLocal
+}
 
 // Función para generar las cards del shop
+mostrarServicios(SERVICIOS);
 
+function mostrarServicios (array) {
+    CONTENEDOR.innerHTML = '';
 
-PRODUCTOS.forEach ( (plan) => {
-    let div = document.createElement('div');
-    div.classList.add('shop-introduction');
-    div.innerHTML += `
-        <img src=${plan.imagen} alt="nutrición y maternidad">
-        <h3>${plan.nombre}</h3>
-        <p>${plan.descripcion}</p>
-        <p>$ ${plan.precio}</p>
-        <href="#" class="btn" onclick="AGREGAR_AL CARRITO()"><span class="btn__text">Comprar</span></a>
-    `
-    console.log(div);
+    array.forEach ( (servicios) => {
+        let article = document.createElement('article');
+        article.classList.add('shop-container__item');
+        article.innerHTML += `
+            <img src=${servicios.imagen} alt="nutrición y maternidad">
+            <h3>${servicios.nombre}</h3>
+            <p>${servicios.descripcion}</p>
+            <p class="shop-container__precio">$ ${servicios.precio}</p>
+            <a href="#" class="btn" onclick="AGREGAR_AL_CARRITO(${servicios.id})"><span class="btn__text">Agregar al carrito</span></a>
+        `
 
-    contenedor.appendChild(div);
+        CONTENEDOR.appendChild(article);
+    })
+}
+
+// Función que permite filtrar las categorías del shop
+const FILTRAR_SHOP = () => {
+    let valorFiltro = FILTRO_SHOP.value;
+    
+    if (valorFiltro == 'todos') {
+        mostrarServicios(SERVICIOS);
+    } else {
+        mostrarServicios(SERVICIOS.filter (el => el.categoria == FILTRO_SHOP.value))
+    }
+}
+
+FILTRAR_SHOP();
+
+// Función para pasar los productos al carrito 
+const ACTUALIZAR_CARRITO = () => {
+    CONTENEDOR_CARRITO.innerHTML=''
+    carrito.forEach ( (servicios) => {
+        let div = document.createElement('div');
+        div.classList.add('producto-carrito');
+        div.innerHTML = `
+            <p>${servicios.nombre}</p>
+            <p>$ ${servicios.precio}</p>
+            <p>Cantidad: 1</p>
+            <a href="#" onclick=ELIMINAR_SERVICIO(${servicios.id})><span class="iconify" data-icon="bi:trash" data-inline="false"></span></a>
+        `
+        CONTENEDOR_CARRITO.appendChild(div)
+    })
+    CONTADOR.innerText = carrito.length;
+
+    PRECIO_TOTAL.innerText = carrito.reduce( (acc, el) => acc += el.precio, 0 )
+}
+
+// Función para agregar al carrito
+const AGREGAR_AL_CARRITO = (id) => {
+    let productoElegido = SERVICIOS.find( servicios => servicios.id == id );
+    carrito.push(productoElegido)
+    ACTUALIZAR_CARRITO();
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+// Función para eliminar elementos del carrito 
+const ELIMINAR_SERVICIO = (id) => {
+    let productoEliminado = carrito.find (el => el.id == id);
+    let indice = carrito.indexOf(productoEliminado);
+    carrito.splice(indice, 1);
+    ACTUALIZAR_CARRITO();
+}
+
+// Evento para filtrar shop según la categoría del servicio elegida.
+FILTRO_SHOP.addEventListener('change', FILTRAR_SHOP)
+
+// Evento para que al hacer clic sobre el icono carrito se abra el modal
+BTN_ABRIR_CARRITO.addEventListener('click', () =>
+    CONTENEDOR_MODAL.classList.add('modal-activo')
+)
+
+// Evento para que al hacer clic sobre el icono cerrar del carrito, se cierre el modal
+BTN_CERRAR_CARRITO.addEventListener('click', () =>
+    CONTENEDOR_MODAL.classList.remove('modal-activo')
+)
+
+// Evento para que cuando se cliquee fuera del modal también se cierre el carrito
+CONTENEDOR_MODAL.addEventListener('click', () => {
+    CONTENEDOR_MODAL.classList.remove('modal-activo')
 })
 
-// // Comprobación nombre usuario
-// const USUARIO_LOCAL_STORAGE = localStorage.getItem('usuario');
-// let usuario;
+// Evento para que no se cierre el modal del carrito cuando hacemos clic sobre cualquier elemento que no sea el botón cerrar
+MODAL_CARRITO.addEventListener('click', (ev) => {
+    ev.stopPropagation()
+})
 
-// const COMPROBACION_USUARIO = () => {
-//     if (USUARIO_LOCAL_STORAGE == null) {
-//         usuario = prompt('Hola!. Ingresá tu nombre');
-//     } else {
-//         usuario = USUARIO_LOCAL_STORAGE;
-//         alert(`'Bienvenido/a ' ${usuario}`);
-//     }
-//     localStorage.setItem('usuario', usuario);
-// }
+/* Evento para cargar el carrito almacenado en el LocalStorage cuando se cargue el DOM y a su vez ejecuta la función LOCAL_STORAGE que imprime los servicios en el modal */
+document.addEventListener('DOMContentLoaded', () => {
+    if (JSON.parse(localStorage.getItem('carrito'))) {
+        carrito = carritoLocal
+        CONTADOR.innerText = carritoLocal.length;
 
-// COMPROBACION_USUARIO();
-
-// // Comprobación si el carrito tiene productos ya guardados
-// const COMPROBACION_CARRITO = () => {
-//     if ( CARRITO_LOCAL_STORAGE == null ) {
-//         carrito = [];
-//     } else {
-//         let continuarCompra = prompt('Querés continuar con tu compra?')
-//         if ( continuarCompra == 'si' ){
-//             carrito = CARRITO_LOCAL_STORAGE;
-//         }
-//     }
-// }
-
-// COMPROBACION_CARRITO ();
-
-// // Función para agregar al carrito los productos 
-// let inicio = 'inicio';
-
-// const AGREGAR_AL_CARRITO = () => {
-//     while (inicio !== 'salir') {
-//         let eleccionUsuario =  parseInt(prompt('Elegí el recetario que querés: Ingresá 1 para Plan semanal, 2 para Plan mensual y 3 para Plan anual. Si no querés más ingresa: salir'));
-//         let productoElegido = PRODUCTOS.find( elemento => elemento.id === eleccionUsuario );
-
-//         if (productoElegido) {
-//             carrito.push(productoElegido);
-//         } else {
-//             inicio = prompt('¿Estas seguro que no queres otro plan?. Si no querés más ingresá salir.');    
-//         }
-//     }
-
-//     localStorage.setItem( 'carrito', JSON.stringify(carrito) );
-
-//     return carrito;
-// }
-
-// AGREGAR_AL_CARRITO();
-
-// //Funcion para calcular el subtotal, antes de descuentos y cuotas
-// const SUBTOTAL_USUARIO = () => {
-//     let subtotal = 0;
-//     carrito.forEach(elemento => {
-//         subtotal += elemento.precio;
-//     });
-//     alert(`'El total parcial de tu compra es: ' ${subtotal}`);
-//     console.log(subtotal)
-//     return subtotal;
-// }
-
-// // Función para calcular el descuento del 5% si compra más de 200
-// const DESCUENTO_COMPRA = () => {
-//     let aplicaDescuento = SUBTOTAL_USUARIO();
-//     if (aplicaDescuento >= 200) {
-//         alert('Aplica descuento adicional del 5% por tu compra');
-//         return (aplicaDescuento - ((aplicaDescuento*5)/100));
-//     } else {
-//         alert('No aplica descuento adicional por tu compra');
-//         return aplicaDescuento
-//     }
-// }
-
-// // Función para calcular cuotas, posibilidades 1 sin interes y 3 con 10% de interes y 6 con 20% de interes
-// const CUOTAS_CON_INTERES = () => {
-//     let compraTotal = DESCUENTO_COMPRA();
-//     let cuotas = Number(prompt('Ingresa cantidad de cuotas: 1, 3 o 6'));
-
-//     if (cuotas === 6) {
-//         let totalEnCuotas = compraTotal + ((compraTotal * 20) / 100);
-//         let totalEnCuotasDosDecimales = totalEnCuotas.toFixed(2);
-//         let totalCadaCuota = totalEnCuotasDosDecimales / cuotas;
-//         let dosDecimales = totalCadaCuota.toFixed(2);
-//         alert(`El total de la compra es ${totalEnCuotasDosDecimales} en ${cuotas} cuotas de ${dosDecimales} cada una`);
-//     } else if (cuotas === 3) {
-//         let totalEnCuotas = compraTotal + ((compraTotal * 10) / 100);
-//         let totalEnCuotasDosDecimales = totalEnCuotas.toFixed(2);
-//         let totalCadaCuota = totalEnCuotasDosDecimales / cuotas;
-//         let dosDecimales = totalCadaCuota.toFixed(2);
-//         alert(`El total de la compra es ${totalEnCuotasDosDecimales} en ${cuotas} cuotas de ${dosDecimales} cada una`);
-//     } else if (cuotas === 1 ) {
-//         alert(`El total de la compra es ${compraTotal} en ${cuotas} cuota`);
-//     } else {
-//         alert(cuotas = Number(prompt('Volvé a ingresar la cantidad de cuotas: 1, 3 o 6')));
-//     }
-// }
-
-// CUOTAS_CON_INTERES();
+    } else {
+        carrito 
+        CONTADOR.innerText = carrito.length;
+    }
+    
+    LOCAL_STORAGE();
+})
