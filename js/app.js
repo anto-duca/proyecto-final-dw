@@ -1,7 +1,6 @@
 
 const CONTENEDOR = document.getElementById('servicios');
 const FILTRO_SHOP = document.getElementById('categoria');
-const AGREGAR_CARRITO = document.getElementById('agregarAlCarrito');
 const CONTENEDOR_MODAL = document.getElementsByClassName('modal-contenedor')[0];
 const BTN_ABRIR_CARRITO = document.getElementById('botonAbrir');
 const BTN_CERRAR_CARRITO = document.getElementById('carritoCerrar');
@@ -52,7 +51,7 @@ function mostrarServicios (array) {
             <h3>${servicios.nombre}</h3>
             <p>${servicios.descripcion}</p>
             <p class="shop-container__precio">$ ${servicios.precio}</p>
-            <a href="#" class="btn" onclick="AGREGAR_AL_CARRITO(${servicios.id})"><span class="btn__text">Agregar al carrito</span></a>
+            <a href="#" class="btn" onclick=AGREGAR_AL_CARRITO(${servicios.id})><span class="btn__text">Agregar al carrito</span></a>
         `
 
         CONTENEDOR.appendChild(article);
@@ -95,8 +94,8 @@ const ACTUALIZAR_CARRITO = () => {
 const AGREGAR_AL_CARRITO = (id) => {
     let productoElegido = SERVICIOS.find( servicios => servicios.id == id );
     carrito.push(productoElegido)
-    ACTUALIZAR_CARRITO();
     localStorage.setItem('carrito', JSON.stringify(carrito));
+    ACTUALIZAR_CARRITO();
 }
 
 // Función para eliminar elementos del carrito 
@@ -134,7 +133,7 @@ MODAL_CARRITO.addEventListener('click', (ev) => {
 /* Evento para cargar el carrito almacenado en el LocalStorage cuando se cargue el DOM y a su vez ejecuta la función LOCAL_STORAGE que imprime los servicios en el modal */
 document.addEventListener('DOMContentLoaded', () => {
     if (JSON.parse(localStorage.getItem('carrito'))) {
-        carrito = carritoLocal
+        carrito = [...carritoLocal]
         CONTADOR.innerText = carritoLocal.length;
 
     } else {

@@ -1,4 +1,4 @@
-// Creación de objetos con propiedades y un método.
+// Creación de objetos (servicios) con propiedades y un método.
 class Servicios {
     constructor (id, nombre, imagen, descripcion, inclusiones, categoria, precio) {
         this.id = id;
@@ -28,4 +28,3 @@ const CONSULTA_INICIAL_PRESENCIAL = new Servicios (5, 'Consulta inicial presenci
 PLAN_ANUAL.descuento();
 
 const SERVICIOS = [PLAN_SEMANAL, PLAN_MENSUAL, PLAN_ANUAL, CONSULTA_INICIAL_ONLINE, CONSULTA_INICIAL_PRESENCIAL];
-
