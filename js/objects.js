@@ -11,7 +11,7 @@ class Servicios {
     }
 
     descuento () {
-        if (this.precio >= 190) {
+        if (this.precio >= 950) {
             this.precio = (this.precio - ((this.precio*5)/100));
         } else {
             this.precio = this.precio;

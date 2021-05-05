@@ -10,8 +10,8 @@
 
 // modal carrito 
 .modal-contenedor {
-    position: fixed;
-    top: 0;
+    position: absolute;
+        top: 0;
     display: flex;
         justify-content: center;
         align-items: center;
@@ -53,8 +53,8 @@
 
 #carritoCerrar {
     position: absolute;
-    top: 15px;
-    right: 15px;
+        top: 15px;
+        right: 15px;
     font-size: 1.5rem;
     color: color(accent-dark);
     border: none;

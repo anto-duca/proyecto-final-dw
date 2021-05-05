@@ -1,4 +1,3 @@
-
 const CONTENEDOR = document.getElementById('servicios');
 const FILTRO_SHOP = document.getElementById('categoria');
 const CONTENEDOR_MODAL = document.getElementsByClassName('modal-contenedor')[0];
@@ -16,23 +15,23 @@ let carrito = [];
 let carritoLocal = JSON.parse(localStorage.getItem('carrito'));
 
 const LOCAL_STORAGE = () => {
-
+    
     if (carritoLocal != null) {
         carritoLocal.forEach ( (servicios) => {
             let div = document.createElement('div');
             div.classList.add('producto-carrito');
-    
+            
             div.innerHTML = `
-                <p>${servicios.nombre}</p>
-                <p>$ ${servicios.precio}</p>
-                <p>Cantidad: 1</p>
-                <a href="#" onclick=ELIMINAR_SERVICIO(${servicios.id})><span class="iconify" data-icon="bi:trash" data-inline="false"></span></a>
+            <p>${servicios.nombre}</p>
+            <p>$ ${servicios.precio}</p>
+            <p>Cantidad: 1</p>
+            <button onclick=ELIMINAR_SERVICIO(${servicios.id})><span class="iconify" data-icon="bi:trash" data-inline="false"></span></button>
             `
             CONTENEDOR_CARRITO.appendChild(div)
         })
-
+        
         PRECIO_TOTAL.innerText = carritoLocal.reduce( (acc, el) => acc += el.precio, 0 );
-    }
+    } 
 
     return carritoLocal
 }
@@ -43,15 +42,15 @@ mostrarServicios(SERVICIOS);
 function mostrarServicios (array) {
     CONTENEDOR.innerHTML = '';
 
-    array.forEach ( (servicios) => {
+    array.forEach ( (servicio) => {
         let article = document.createElement('article');
         article.classList.add('shop-container__item');
         article.innerHTML += `
-            <img src=${servicios.imagen} alt="nutrición y maternidad">
-            <h3>${servicios.nombre}</h3>
-            <p>${servicios.descripcion}</p>
-            <p class="shop-container__precio">$ ${servicios.precio}</p>
-            <a href="#" class="btn" onclick=AGREGAR_AL_CARRITO(${servicios.id})><span class="btn__text">Agregar al carrito</span></a>
+            <img src=${servicio.imagen} alt="nutrición y maternidad">
+            <h3>${servicio.nombre}</h3>
+            <p>${servicio.descripcion}</p>
+            <p class="shop-container__precio">$ ${servicio.precio}</p>
+            <button class="btn" onclick=AGREGAR_AL_CARRITO(${servicio.id})><span class="btn__text">Agregar al carrito</span></button>
         `
 
         CONTENEDOR.appendChild(article);
@@ -67,6 +66,9 @@ const FILTRAR_SHOP = () => {
     } else {
         mostrarServicios(SERVICIOS.filter (el => el.categoria == FILTRO_SHOP.value))
     }
+
+    // Evento para filtrar shop según la categoría del servicio elegida.
+    FILTRO_SHOP.addEventListener('change', FILTRAR_SHOP)
 }
 
 FILTRAR_SHOP();
@@ -74,17 +76,19 @@ FILTRAR_SHOP();
 // Función para pasar los productos al carrito 
 const ACTUALIZAR_CARRITO = () => {
     CONTENEDOR_CARRITO.innerHTML=''
-    carrito.forEach ( (servicios) => {
+
+    carrito.forEach( (servicio) => {
         let div = document.createElement('div');
         div.classList.add('producto-carrito');
         div.innerHTML = `
-            <p>${servicios.nombre}</p>
-            <p>$ ${servicios.precio}</p>
+            <p>${servicio.nombre}</p>
+            <p>$ ${servicio.precio}</p>
             <p>Cantidad: 1</p>
-            <a href="#" onclick=ELIMINAR_SERVICIO(${servicios.id})><span class="iconify" data-icon="bi:trash" data-inline="false"></span></a>
+            <button onclick=ELIMINAR_SERVICIO(${servicio.id})><span class="iconify" data-icon="bi:trash" data-inline="false"></span></button>
         `
         CONTENEDOR_CARRITO.appendChild(div)
     })
+
     CONTADOR.innerText = carrito.length;
 
     PRECIO_TOTAL.innerText = carrito.reduce( (acc, el) => acc += el.precio, 0 )
@@ -106,9 +110,6 @@ const ELIMINAR_SERVICIO = (id) => {
     localStorage.setItem('carrito', JSON.stringify(carrito));
     ACTUALIZAR_CARRITO();
 }
-
-// Evento para filtrar shop según la categoría del servicio elegida.
-FILTRO_SHOP.addEventListener('change', FILTRAR_SHOP)
 
 // Evento para que al hacer clic sobre el icono carrito se abra el modal
 BTN_ABRIR_CARRITO.addEventListener('click', () =>

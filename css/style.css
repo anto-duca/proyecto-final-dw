@@ -686,7 +686,7 @@ textarea {
       text-align: left; } }
 
 .modal-contenedor {
-  position: fixed;
+  position: absolute;
   top: 0;
   display: flex;
   justify-content: center;
