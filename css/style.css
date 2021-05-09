@@ -752,6 +752,9 @@ textarea {
 .icono-carrito {
   font-size: 2.5rem; }
 
+.btn-eliminar {
+  color: #361c58; }
+
 .shop-container {
   display: flex;
   flex-flow: column nowrap;
