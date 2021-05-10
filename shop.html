@@ -29,6 +29,19 @@
 </head>
 
 <body>
+    <!-- Modal carrito -->
+    <div class="modal-contenedor">
+        <div class="modal-carrito">
+            <h4>MI CARRITO</h4>
+            <button id="carritoCerrar"><span class="iconify" data-icon="clarity:window-close-line" data-inline="false"></span></button>
+            <div id="contenedor-carrito">
+                <p class="carrito-vacio">No hay productos en tu carrito</p>
+            </div>
+            <p class="precio-producto">Total: $<span id="precioTotal"></span></p>
+            <a href="#" class="btn">Ir a mi carrito</a>
+        </div>
+    </div>
+
     <header>
         <nav class="navbar navbar-expand-lg fixed-top nav">
             <div class="container-fluid">
@@ -69,11 +82,9 @@
                     </ul>
                 </div>
 
-                <div class="d-flex align-items-center">
-                    <a href="#" id="botonAbrir"><span class="iconify icon-shop icono-carrito" data-icon="ant-design:shopping-cart-outlined" data-inline="true"></span></a>
-                    <div class="contador-carrito">
-                        </span><span id="contadorCarrito">
-                    </div>
+                <div class="d-flex">
+                    <button id="botonAbrir"><span class="iconify icon-shop icono-carrito" data-icon="ant-design:shopping-cart-outlined" data-inline="false"></span></button>
+                    <span class="contador-carrito" id="contadorCarrito"></span>
                 </div>
             </div>
         </nav>
@@ -83,19 +94,8 @@
         </section>
     </header>
 
-    <main>
-        <!-- Modal carrito -->
-        <div class="modal-contenedor">
-            <div class="modal-carrito">
-                <h3>Carrito</h3>
-                <button id="carritoCerrar"><span class="iconify" data-icon="clarity:window-close-line" data-inline="false"></span></button>
-                <div id="contenedor-carrito">
-                </div>
-                <p class="precio-producto">Total: $<span id="precioTotal"></span></p>
-                <a href="#" class="btn">Ir a mi carrito</a>
-            </div>
-        </div>
 
+    <main>
         <!-- introducción blog -->
         <section class="shop-introduction">
             <h2>Bienvenido <span id="nombre"> </span> a mi tienda online</h2>
@@ -112,11 +112,15 @@
                 <option value="presenciales">Consultas Presenciales</option>
             </select>
         </section>
+
+        <!-- Warning agregar al carrito -->
+        <div id="warning" class="warning-visible">
+        </div>
         
         <!-- contenido shop -->
         <section class="shop-container" id="servicios">
         </section>
-        
+
         <!-- pagination -->
         <!-- <section>
             <ul class="pagination">

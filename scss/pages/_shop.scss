@@ -24,17 +24,23 @@
 }
 
 .modal-activo {
+    position: fixed;
     opacity: 1;
     visibility: visible;
+    z-index: 100;
 }
 
 .modal-carrito {
     position: relative;
-    min-width: 500px;
+    min-width: 300px;
     padding: 2em;
     margin-top: -100%;
     transition: all .5s;
     background: color(button);
+
+    @media only screen and (min-width: 567px) {
+        min-width: 500px;
+    }
 
         .btn {
             display: inline-block;
@@ -62,30 +68,48 @@
 }
 
 .producto-carrito {
-    display: grid;
-        grid-template-columns: repeat(4, minmax(200px, 1fr));
-        grid-template-rows: repeat(1, minmax(min-content, 1fr));
-        column-gap: 1em;
-        justify-items: center;
-        align-items: center;
+    display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
     margin: 1em 0;
+
+    @media only screen and (min-width: 768px) {
+        display: grid;
+            grid-template-columns: repeat(4, minmax(200px, 1fr));
+            grid-template-rows: repeat(1, minmax(min-content, 1fr));
+            column-gap: 1em;
+            justify-items: center;
+            align-items: center;
+        margin: 1em 0;
+    }   
 }
 
 .contador-carrito { 
     position: relative;
         top: -13px;
         left: -28px;
-    width: 22px;
-    height: 22px;
+    width: 17px;
+    height: 17px;
     text-align: center;
+    font-size: .8rem;
     background: color(accent-dark);
     border-radius: 50%;
     color: color(primary);
     text-decoration: none;
+
+    @media only screen and (min-width: 567px) {
+        width: 20px;
+        height: 20px;
+        font-size: 1rem;
+    }
 }
 
 .icono-carrito {
-    font-size: 2.5rem;
+    font-size: 2rem;
+
+    @media only screen and (min-width: 567px) {
+    font-size: 2.2rem;
+    }
 }
 
 .btn-eliminar{
@@ -140,3 +164,45 @@
     }
 }
 
+.warning-visible {
+    position: sticky;
+        top: 50%;
+        right: 50%;
+    visibility: visible;
+    background: rgb(235, 132, 132);
+    transition: all 1s;
+}
+
+.warning-duplicado {
+    position: relative;
+    display: flex;
+        justify-content: space-evenly;
+    button {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        font-size: 1.5rem;
+        color: color(accent-dark);
+        border: none;
+        background-color: transparent;
+    }
+
+    p {
+        padding: 1.5em;
+    }
+}
+
+.warning-hide {
+    display: none;
+    position: absolute;
+    transition: all 1s;
+}
+
+#botonAbrir {
+    background: none;
+    border: none;
+}
+
+.carrito-vacio {
+    margin: 1.5em 0;
+}
