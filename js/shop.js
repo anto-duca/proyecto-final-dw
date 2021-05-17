@@ -8,32 +8,27 @@ const MODAL_CARRITO = document.getElementsByClassName('modal-carrito')[0];
 const CONTENEDOR_CARRITO = document.getElementById('contenedor-carrito');
 const PRECIO_TOTAL = document.getElementById('precioTotal');
 const CONTADOR = document.getElementById('contadorCarrito');
+const CONTENEDOR_CARRITO_VACIO = document.getElementById('carritoVacio');
 
 // Función para imprimir los productos del local storage en el modal del carrito
 let carritoLocal = JSON.parse(localStorage.getItem('carrito'));
 
 const LOCAL_STORAGE = () => {
-    
     if (carritoLocal != null) {
         carritoLocal.forEach ( (SERVICIOS) => {
             let {nombre, precio, id, cantidad = 1} = SERVICIOS
-
             let div = document.createElement('div');
             div.classList.add('producto-carrito');
-            
             div.innerHTML = `
             <p>${nombre}</p>
-            <p>$ ${precio}</p>
             <p> Cantidad: ${cantidad} </p>
-            <a href="#" onclick=ELIMINAR_SERVICIO(${id})><span class="iconify btn-eliminar" data-icon="bi:trash" data-inline="false"></span></a>
+            <p>$ ${precio}</p>
+            <a onclick=ELIMINAR_SERVICIO(${id})><span class="iconify btn-eliminar" data-icon="bi:trash" data-inline="false"></span></a>
         `
             CONTENEDOR_CARRITO.appendChild(div)
         })
-        
-        PRECIO_TOTAL.innerText = carritoLocal.reduce( (acc, el) => acc += el.precio, 0 );
-    } 
-
-    return carritoLocal
+    }     
+    PRECIO_TOTAL.innerText = carritoLocal.reduce( (acc, el) => acc += el.precio, 0 );
 }
 
 /* Evento para cargar el carrito almacenado en el LocalStorage cuando se cargue el DOM y a su vez ejecuta la función LOCAL_STORAGE que imprime los servicios en el modal */
@@ -41,10 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (JSON.parse(localStorage.getItem('carrito'))) {
         carrito = [...carritoLocal]
         CONTADOR.innerText = carritoLocal.length;
+    } 
 
+    if(carrito.length > 0) {
+        BTN_ABRIR_CARRITO.addEventListener('click', () => {
+            CONTENEDOR_CARRITO_VACIO.classList.add('carrito-vacio-hide')
+        })
     } else {
-        carrito 
-        CONTADOR.innerText = carrito.length;
+        BTN_ABRIR_CARRITO.addEventListener('click', () => {
+            CONTENEDOR_CARRITO_VACIO.classList.remove('carrito-vacio-hide')
+        })
     }
 
     LOCAL_STORAGE();
@@ -93,36 +94,50 @@ FILTRAR_SHOP();
 
 // Función para agregar al carrito
 const AGREGAR_AL_CARRITO = (servicioId) => {
-    let itemEnCarrito = carrito.find(element => element.id == servicioId)
+    let itemEnCarrito = carrito.find(element => element.id == servicioId);
+
+    const ALERTA_MODAL = document.getElementsByClassName('warning-contenedor')[0];
+    let mensajeAgregado = $("#agregadoCarrito");
+
 
     if (itemEnCarrito) {
-        const ALERTA_MODAL = document.getElementById('warning');
-        
         ALERTA_MODAL.innerHTML = '';
         let div = document.createElement('div');
-        div.classList.add('warning-duplicado');
-        div.innerHTML = `<p> ${itemEnCarrito.nombre} ya fue agregado al carrito</p>
-                        <button id="warning-close"><span class="iconify" data-icon="clarity:window-close-line" data-inline="false"></span></button>`
+        div.classList.add('warning-alert');
+        div.innerHTML = `<button id="warning-close"><span class="iconify" data-icon="clarity:window-close-line" data-inline="false"></span><button>
+                        <p> ${itemEnCarrito.nombre} ya fue agregado al carrito</p>
+                        `
         ALERTA_MODAL.appendChild(div)
-        
-        const BTN_AGREGAR_CARRITO = document.getElementById('agregarCarrito');
-        BTN_AGREGAR_CARRITO.addEventListener('click', () =>
-            ALERTA_MODAL.classList.add('warning-visible'),
-            ALERTA_MODAL.classList.remove('warning-hide')
-        );
+
+        $('.shop-container').on("click", "#agregarCarrito", () => {
+            ALERTA_MODAL.classList.add('warning-visible');
+        });
 
         const BTN_CERRAR_WARNING = document.getElementById('warning-close');
         BTN_CERRAR_WARNING.addEventListener('click', () =>
-            ALERTA_MODAL.classList.add('warning-hide'),
+            ALERTA_MODAL.classList.remove('warning-visible'),
         );
 
-        ALERTA_MODAL.addEventListener('click', () =>
-        ALERTA_MODAL.classList.add('warning-hide'),
+        $('.shop-container').on('click', "#agregarCarrito", () => {
+            mensajeAgregado.hide();
+        });
+
+        ALERTA_MODAL.addEventListener('click', () => 
+            ALERTA_MODAL.classList.remove('warning-visible'),
         );
 
     } else {
         let {id, nombre, precio} = SERVICIOS.find( servicios => servicios.id == servicioId );
-        carrito.push({id, nombre, precio, cantidad: 1})
+        carrito.push({id, nombre, precio, cantidad: 1});
+
+        $('.shop-container').on('click', "#agregarCarrito", () => {
+            mensajeAgregado.show();
+            mensajeAgregado.fadeOut(2000);
+        })
+
+        $('.shop-container').on('click', "#agregarCarrito", () => {
+            ALERTA_MODAL.classList.remove('warning-visible');
+        });
     }
 
     localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -142,7 +157,7 @@ const ACTUALIZAR_CARRITO = () => {
             <p>${nombre}</p>
             <p> Cantidad: ${cantidad} </p>
             <p>$ ${precio}</p>
-            <a href="#" onclick=ELIMINAR_SERVICIO(${id})><span class="iconify btn-eliminar" data-icon="bi:trash" data-inline="false"></span></a>
+            <a onclick=ELIMINAR_SERVICIO(${id})><span class="iconify btn-eliminar" data-icon="bi:trash" data-inline="false"></span></a>
         `
         CONTENEDOR_CARRITO.appendChild(div)
     })
@@ -157,10 +172,10 @@ const ELIMINAR_SERVICIO = (id) => {
     let productoEliminado = carrito.find (el => el.id == id);
     let indice = carrito.indexOf(productoEliminado);
     carrito.splice(indice, 1);
-    let carritoLocal = localStorage.setItem('carrito', JSON.stringify(carrito));
+    localStorage.setItem('carrito', JSON.stringify(carrito));
     ACTUALIZAR_CARRITO();
 
-    if (carritoLocal === undefined) {
+    if (carrito.length === 0) {
         let div = document.createElement('div');
         div.classList.add('carrito-vacio');
         div.innerHTML = `<p>No hay productos en tu carrito</p>`
@@ -169,9 +184,9 @@ const ELIMINAR_SERVICIO = (id) => {
 }
 
 // Evento para que al hacer clic sobre el icono carrito se abra el modal
-BTN_ABRIR_CARRITO.addEventListener('click', () =>
+BTN_ABRIR_CARRITO.addEventListener('click', () => {
     CONTENEDOR_MODAL.classList.add('modal-activo')
-)
+})
 
 // Evento para que cuando se cliquee fuera del modal también se cierre el carrito
 CONTENEDOR_MODAL.addEventListener('click', () => {
@@ -179,11 +194,11 @@ CONTENEDOR_MODAL.addEventListener('click', () => {
 })
 
 // Evento para que no se cierre el modal del carrito cuando hacemos clic sobre cualquier elemento que no sea el botón cerrar
-MODAL_CARRITO.addEventListener('click', (ev) => {
-    ev.stopPropagation()
+MODAL_CARRITO.addEventListener('click', (e) => {
+    e.stopPropagation()
 })
 
 // Evento para que al hacer clic sobre el icono cerrar del carrito, se cierre el modal
-BTN_CERRAR_CARRITO.addEventListener('click', () =>
+BTN_CERRAR_CARRITO.addEventListener('click', () => {
     CONTENEDOR_MODAL.classList.remove('modal-activo')
-)
+})

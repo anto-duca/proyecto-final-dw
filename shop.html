@@ -22,6 +22,7 @@
     <!-- mi JS -->
     <script src="/js/objects.js" defer></script>
     <script src="/js/shop.js" defer></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/app.js" defer></script>
 
     <!-- Bootstrap JS -->
@@ -32,18 +33,29 @@
     <!-- Modal carrito -->
     <div class="modal-contenedor">
         <div class="modal-carrito">
-            <h4>MI CARRITO</h4>
-            <button id="carritoCerrar"><span class="iconify" data-icon="clarity:window-close-line" data-inline="false"></span></button>
-            <div id="contenedor-carrito">
-                <p class="carrito-vacio">No hay productos en tu carrito</p>
+            <div class="modal-carrito-header">
+                <button id="carritoCerrar"><span class="iconify" data-icon="clarity:window-close-line" data-inline="false"></span></button>
+                <h4>MI CARRITO</h4>
             </div>
-            <p class="precio-producto">Total: $<span id="precioTotal"></span></p>
-            <a href="#" class="btn">Ir a mi carrito</a>
+            <div id="contenedor-carrito">
+                <div id="carritoVacio" class="carrito-vacio">
+                    <p>No hay productos en tu carrito</p>
+                </div>
+            </div>
+            <div class="modal-carrito-footer">
+                <p class="precio-producto">Total: $<span id="precioTotal"></span></p>
+                <a href="#" class="btn">Ir a mi carrito</a>
+            </div>
         </div>
     </div>
 
+    <!-- Warning agregar al carrito -->
+    <!-- class="warning-visible" -->
+    <div class="warning-contenedor">
+    </div>
+
     <header>
-        <nav class="navbar navbar-expand-lg fixed-top nav">
+        <nav class="navbar navbar-expand-lg fixed-top nav flex-wrap">
             <div class="container-fluid">
                 <div>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -82,9 +94,16 @@
                     </ul>
                 </div>
 
-                <div class="d-flex">
-                    <button id="botonAbrir"><span class="iconify icon-shop icono-carrito" data-icon="ant-design:shopping-cart-outlined" data-inline="false"></span></button>
+                <div class="d-flex" id="botonAbrir">
+                    <span class="iconify icon-shop icono-carrito" data-icon="ant-design:shopping-cart-outlined" data-inline="false"></span>
                     <span class="contador-carrito" id="contadorCarrito"></span>
+                </div>
+            </div>
+
+            <div id="agregadoCarrito">
+                <div class="agregado-carrito-visible">
+                    <span class="iconify" data-icon="bi:check-circle-fill" data-inline="false"></span>
+                    <p class="producto-agregado">Producto agregado al carrito</p>
                 </div>
             </div>
         </nav>
@@ -94,7 +113,6 @@
         </section>
     </header>
 
-
     <main>
         <!-- introducción blog -->
         <section class="shop-introduction">
@@ -102,7 +120,6 @@
             <p>No elijas la dieta del momento, elegí un estilo de vida que puedas mantener para siempre.</p>
         </section>
 
-        
         <!-- selector desplegable -->
         <section class="select-container">
             <select name="select" class="select" id="categoria">
@@ -113,10 +130,6 @@
             </select>
         </section>
 
-        <!-- Warning agregar al carrito -->
-        <div id="warning" class="warning-visible">
-        </div>
-        
         <!-- contenido shop -->
         <section class="shop-container" id="servicios">
         </section>
