@@ -39,18 +39,18 @@ document.addEventListener('DOMContentLoaded', () => {
         CONTADOR.innerText = carritoLocal.length;
     } 
 
-    if(carrito.length > 0) {
-        BTN_ABRIR_CARRITO.addEventListener('click', () => {
-            CONTENEDOR_CARRITO_VACIO.classList.add('carrito-vacio-hide')
-        })
-    } else {
-        BTN_ABRIR_CARRITO.addEventListener('click', () => {
-            CONTENEDOR_CARRITO_VACIO.classList.remove('carrito-vacio-hide')
-        })
-    }
+    carrito.length > 0 ? (
+            BTN_ABRIR_CARRITO.addEventListener('click', () => {
+                CONTENEDOR_CARRITO_VACIO.classList.add('carrito-vacio-hide')
+            })
+        ) : (
+            BTN_ABRIR_CARRITO.addEventListener('click', () => {
+                CONTENEDOR_CARRITO_VACIO.classList.remove('carrito-vacio-hide')
+            })
+        )
 
     LOCAL_STORAGE();
-})
+});
 
 // Función para generar las cards del shop
 mostrarServicios(SERVICIOS);
