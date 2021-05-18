@@ -81,12 +81,12 @@ const FILTRAR_SHOP = () => {
 
     let valorFiltro = FILTRO_SHOP.value;
     
-    if (valorFiltro == 'todos') {
-        mostrarServicios(SERVICIOS);
-    } else {
+    valorFiltro == 'todos' ? (
+        mostrarServicios(SERVICIOS)
+    ) : (
         mostrarServicios(SERVICIOS.filter (el => el.categoria == FILTRO_SHOP.value))
-    }
-
+    )
+    
     // Evento para filtrar shop según la categoría del servicio elegida.
     FILTRO_SHOP.addEventListener('change', FILTRAR_SHOP)
 }
