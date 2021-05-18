@@ -9,6 +9,7 @@ const CONTENEDOR_CARRITO = document.getElementById('contenedor-carrito');
 const PRECIO_TOTAL = document.getElementById('precioTotal');
 const CONTADOR = document.getElementById('contadorCarrito');
 const CONTENEDOR_CARRITO_VACIO = document.getElementById('carritoVacio');
+CONTADOR.innerText = '0';
 
 // Función para imprimir los productos del local storage en el modal del carrito
 let carritoLocal = JSON.parse(localStorage.getItem('carrito'));
@@ -27,8 +28,8 @@ const LOCAL_STORAGE = () => {
         `
             CONTENEDOR_CARRITO.appendChild(div)
         })
+        PRECIO_TOTAL.innerText = carritoLocal.reduce( (acc, el) => acc += el.precio, 0 );
     }     
-    PRECIO_TOTAL.innerText = carrito.reduce( (acc, el) => acc += el.precio, 0 );
 }
 
 /* Evento para cargar el carrito almacenado en el LocalStorage cuando se cargue el DOM y a su vez ejecuta la función LOCAL_STORAGE que imprime los servicios en el modal */
@@ -161,7 +162,7 @@ const ACTUALIZAR_CARRITO = () => {
         `
         CONTENEDOR_CARRITO.appendChild(div)
     })
-
+    
     CONTADOR.innerText = carrito.length;
 
     PRECIO_TOTAL.innerText = carrito.reduce( (acc, el) => acc += el.precio, 0 )
