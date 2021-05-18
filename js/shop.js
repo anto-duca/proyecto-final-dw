@@ -28,7 +28,7 @@ const LOCAL_STORAGE = () => {
             CONTENEDOR_CARRITO.appendChild(div)
         })
     }     
-    PRECIO_TOTAL.innerText = carritoLocal.reduce( (acc, el) => acc += el.precio, 0 );
+    PRECIO_TOTAL.innerText = carrito.reduce( (acc, el) => acc += el.precio, 0 );
 }
 
 /* Evento para cargar el carrito almacenado en el LocalStorage cuando se cargue el DOM y a su vez ejecuta la función LOCAL_STORAGE que imprime los servicios en el modal */
