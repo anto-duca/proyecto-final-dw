@@ -11,46 +11,31 @@ const CONTADOR = document.getElementById('contadorCarrito');
 const CONTENEDOR_CARRITO_VACIO = document.getElementById('carritoVacio');
 CONTADOR.innerText = '0';
 
+/* Evento para cargar el carrito almacenado en el LocalStorage cuando se cargue el DOM y a su vez ejecuta la función LOCAL_STORAGE que imprime los servicios en el modal */
+document.addEventListener('DOMContentLoaded', () => {
+    LOCAL_STORAGE();
+});
+
 // Función para imprimir los productos del local storage en el modal del carrito
 let carritoLocal = JSON.parse(localStorage.getItem('carrito'));
 
 const LOCAL_STORAGE = () => {
     if (carritoLocal != null) {
-        carritoLocal.forEach ( (SERVICIOS) => {
-            let {nombre, precio, id, cantidad = 1} = SERVICIOS
-            let div = document.createElement('div');
-            div.classList.add('producto-carrito');
-            div.innerHTML = `
-            <p>${nombre}</p>
-            <p> Cantidad: ${cantidad} </p>
-            <p>$ ${precio}</p>
-            <a onclick=ELIMINAR_SERVICIO(${id})><span class="iconify btn-eliminar" data-icon="bi:trash" data-inline="false"></span></a>
-        `
-            CONTENEDOR_CARRITO.appendChild(div)
-        })
-        PRECIO_TOTAL.innerText = carritoLocal.reduce( (acc, el) => acc += el.precio, 0 );
-    }     
-}
-
-/* Evento para cargar el carrito almacenado en el LocalStorage cuando se cargue el DOM y a su vez ejecuta la función LOCAL_STORAGE que imprime los servicios en el modal */
-document.addEventListener('DOMContentLoaded', () => {
-    if (JSON.parse(localStorage.getItem('carrito'))) {
         carrito = [...carritoLocal]
-        CONTADOR.innerText = carritoLocal.length;
-    } 
+        ACTUALIZAR_CARRITO();
+    }     
 
+    //Quita o muestra el texto "No hay productos en tu carrito"
     carrito.length > 0 ? (
-            BTN_ABRIR_CARRITO.addEventListener('click', () => {
-                CONTENEDOR_CARRITO_VACIO.classList.add('carrito-vacio-hide')
-            })
-        ) : (
-            BTN_ABRIR_CARRITO.addEventListener('click', () => {
-                CONTENEDOR_CARRITO_VACIO.classList.remove('carrito-vacio-hide')
-            })
-        )
-
-    LOCAL_STORAGE();
-});
+        BTN_ABRIR_CARRITO.addEventListener('click', () => {
+            CONTENEDOR_CARRITO_VACIO.classList.add('carrito-vacio-hide')
+        })
+    ) : (
+        BTN_ABRIR_CARRITO.addEventListener('click', () => {
+            CONTENEDOR_CARRITO_VACIO.classList.remove('carrito-vacio-hide')
+        })
+    )
+}
 
 // Función para generar las cards del shop
 mostrarServicios(SERVICIOS);
