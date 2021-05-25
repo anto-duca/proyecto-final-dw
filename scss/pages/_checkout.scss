@@ -1,0 +1,30 @@
+#checkout {
+    padding: 1em;
+
+    h2 {
+        border-bottom: 1px solid color(accent-dark);
+    }
+}
+
+.checkout__precio {
+    font-weight: 600;
+}
+
+.precio-total{
+    padding: 1em 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+#checkoutForm {
+    padding: 1em;
+    background-color: color(accent-light); 
+
+    h2 {
+        border-bottom: 1px solid color(accent-dark);
+    }
+}
+
+.checkout_form {
+    border: 1px solid transparent;
+}

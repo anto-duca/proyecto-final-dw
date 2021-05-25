@@ -4,7 +4,6 @@
         justify-content: center;
         align-items: center;
     padding: 1.5em .5em;
-    text-align: center;
     background-color: color(accent-light);
 
     &__intro {
@@ -48,4 +47,97 @@
     &:hover {
         @include hover;
     }
+}
+
+.form__group-input {
+    position: relative;
+}
+
+.form__input {
+    margin: .25em 0;
+	padding: .5em;
+	width: 100%;
+	background: #fff;
+	border: 2px solid transparent;
+	border-radius: 3px;
+	transition: .3s ease all;
+}
+
+.form__input:focus {
+    border: 2px solid color(accent-dark);
+    outline: none;
+    box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
+}
+
+.form__input-error {
+    display: none;
+}
+
+.form__input-error-active {
+    display: block;
+}
+
+.form__validation-state {
+    position: absolute;
+        right: 10px;
+        bottom: 17px;
+    font-size: 1.2rem;
+    z-index: 100;
+    opacity: 0;
+}
+
+.form__message {
+    display: none;
+    padding: 0 .5em;
+    height: 45px;
+    background: color(failure);
+    border-radius: 3px;
+
+    .iconify {
+        font-size: 1.2rem;
+    }
+
+    p {
+        line-height: 45px;
+    }
+}
+
+.form__message-active {
+    display: block;
+}
+
+.form__message-success {
+    display: none;
+    text-align: center;
+    font-size: .9rem;
+    color: color(success);
+}
+
+.form__message-success-active {
+    display: block;
+}
+
+// Estilos para validacion 
+.form__group-right .form__validation-state {
+    color: color(success);
+    opacity: 1;
+}
+
+.form__group-right .form__input {
+    color: color(success);
+    border: 2px solid color(success);
+}
+
+.form__group-wrong .form__validation-state {
+    color: color(failure);
+    opacity: 1;
+}
+
+.form__group-wrong .form__input {
+    color: color(failure);
+    border: 2px solid color(failure);
+}
+
+.hidden {
+    display: none;
 }

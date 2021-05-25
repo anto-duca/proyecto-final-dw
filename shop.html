@@ -20,10 +20,8 @@
     <link rel="stylesheet" href="css/style.css">
 
     <!-- mi JS -->
-    <script src="~/../js/objects.js" defer></script>
     <script src="~/../js/shop.js" defer></script>
-    <script src="~/../js/jquery-3.6.0.min.js"></script>
-    <script src="~/../js/app.js" defer></script>
+    <script src="~/../js/jquery-3.6.0.min.js" defer></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous" defer></script>
@@ -37,14 +35,14 @@
                 <button id="carritoCerrar"><span class="iconify" data-icon="clarity:window-close-line" data-inline="false"></span></button>
                 <h4>MI CARRITO</h4>
             </div>
-            <div id="contenedor-carrito">
-                <div id="carritoVacio" class="carrito-vacio">
-                    <p>No hay productos en tu carrito</p>
-                </div>
+            <div id="carritoVacio" class="carrito-vacio">
+                <p>No hay productos en tu carrito</p>
+            </div>
+            <div id="contenedorCarrito">
             </div>
             <div class="modal-carrito-footer">
                 <p class="precio-producto">Total: $<span id="precioTotal"></span></p>
-                <a href="#" class="btn">Ir a mi carrito</a>
+                <a id="checkout" href="checkout.html" class="btn">Ir a mi carrito</a>
             </div>
         </div>
     </div>
@@ -74,13 +72,8 @@
                         <li class="nav-item nav__item">
                             <a class="nav-link nav__link" href="index.html">Inicio</a>
                         </li>
-                        <li class="nav-item dropdown nav__item">
-                            <a class="nav-link dropdown-toggle nav__link" href="servicios.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Servicios</a>
-                            <ul class="dropdown-menu dropdown__menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item dropdown__item" href="shop.html">Consultas Presenciales</a></li>
-                                <li><a class="dropdown-item dropdown__item" href="shop.html">Consultas Online</a></li>
-                                <li><a class="dropdown-item dropdown__item" href="shop.html">Planes Alimentarios</a></li>
-                            </ul>
+                        <li class="nav-item nav__item">
+                            <a class="nav-link nav__link" href="shop.html">Tienda</a>
                         </li>
                         <li class="nav-item nav__item">
                             <a class="nav-link nav__link" href="blog.html">Blog</a>

@@ -5,40 +5,41 @@ const BTN_ABRIR_CARRITO = document.getElementById('botonAbrir');
 const BTN_CERRAR_CARRITO = document.getElementById('carritoCerrar');
 const CONTENEDOR_MODAL = document.getElementsByClassName('modal-contenedor')[0];
 const MODAL_CARRITO = document.getElementsByClassName('modal-carrito')[0];
-const CONTENEDOR_CARRITO = document.getElementById('contenedor-carrito');
+const CONTENEDOR_CARRITO = document.getElementById('contenedorCarrito');
 const PRECIO_TOTAL = document.getElementById('precioTotal');
 const CONTADOR = document.getElementById('contadorCarrito');
 const CONTENEDOR_CARRITO_VACIO = document.getElementById('carritoVacio');
+const BTN_ELIMINAR_SERVICIO = document.getElementById('eliminarServicio');
+
 CONTADOR.innerText = '0';
 
-/* Evento para cargar el carrito almacenado en el LocalStorage cuando se cargue el DOM y a su vez ejecuta la función LOCAL_STORAGE que imprime los servicios en el modal */
-document.addEventListener('DOMContentLoaded', () => {
-    LOCAL_STORAGE();
-});
-
 // Función para imprimir los productos del local storage en el modal del carrito
-let carritoLocal = JSON.parse(localStorage.getItem('carrito'));
-
 const LOCAL_STORAGE = () => {
-    if (carritoLocal != null) {
-        carrito = [...carritoLocal]
-        ACTUALIZAR_CARRITO();
-    }     
-
-    //Quita o muestra el texto "No hay productos en tu carrito"
-    carrito.length > 0 ? (
-        BTN_ABRIR_CARRITO.addEventListener('click', () => {
-            CONTENEDOR_CARRITO_VACIO.classList.add('carrito-vacio-hide')
-        })
-    ) : (
-        BTN_ABRIR_CARRITO.addEventListener('click', () => {
-            CONTENEDOR_CARRITO_VACIO.classList.remove('carrito-vacio-hide')
-        })
-    )
+    let carritoLocal = JSON.parse(localStorage.getItem('carrito'));
+    carrito = [...carritoLocal]
+    CONTADOR.innerText = carrito.length;
+    ACTUALIZAR_CARRITO();
 }
 
+/* Evento que espera a que se cargue el DOM y a ejecuta la función LOCAL_STORAGE que imprime los servicios en el modal del carrito*/
+document.addEventListener('DOMContentLoaded', () => {
+    LOCAL_STORAGE();
+})
+
+let servicios = [];
+
+/* Función asíncrona para simular la obtención de los servicios desde una "base de datos" que en realidad es el json ubicado en la raíz del proyecto */
+const obtenerServicios = async () => {
+    const respuesta = await fetch('./servicios.json')
+    const data = await respuesta.json()
+    servicios = data
+    mostrarServicios(servicios)
+}
+
+obtenerServicios();
+
 // Función para generar las cards del shop
-mostrarServicios(SERVICIOS);
+mostrarServicios(servicios);
 
 function mostrarServicios (array) {
     const CONTENEDOR = document.getElementById('servicios');
@@ -67,9 +68,9 @@ const FILTRAR_SHOP = () => {
     let valorFiltro = FILTRO_SHOP.value;
     
     valorFiltro == 'todos' ? (
-        mostrarServicios(SERVICIOS)
+        mostrarServicios(servicios)
     ) : (
-        mostrarServicios(SERVICIOS.filter (el => el.categoria == FILTRO_SHOP.value))
+        mostrarServicios(servicios.filter (el => el.categoria == FILTRO_SHOP.value))
     )
     
     // Evento para filtrar shop según la categoría del servicio elegida.
@@ -81,10 +82,8 @@ FILTRAR_SHOP();
 // Función para agregar al carrito
 const AGREGAR_AL_CARRITO = (servicioId) => {
     let itemEnCarrito = carrito.find(element => element.id == servicioId);
-
     const ALERTA_MODAL = document.getElementsByClassName('warning-contenedor')[0];
     let mensajeAgregado = $("#agregadoCarrito");
-
 
     if (itemEnCarrito) {
         ALERTA_MODAL.innerHTML = '';
@@ -113,8 +112,8 @@ const AGREGAR_AL_CARRITO = (servicioId) => {
         );
 
     } else {
-        let {id, nombre, precio} = SERVICIOS.find( servicios => servicios.id == servicioId );
-        carrito.push({id, nombre, precio, cantidad: 1});
+        let {id, nombre, inclusiones, precio} = servicios.find( servicios => servicios.id == servicioId );
+        carrito.push({id, nombre, inclusiones,precio, cantidad: 1});
 
         $('.shop-container').on('click', "#agregarCarrito", () => {
             mensajeAgregado.show();
@@ -127,15 +126,16 @@ const AGREGAR_AL_CARRITO = (servicioId) => {
     }
 
     localStorage.setItem('carrito', JSON.stringify(carrito));
+
     ACTUALIZAR_CARRITO();
 }
 
-// Función para pasar los productos al carrito 
+/* Función para imprimir los productos en el carrito, si no hay productos en el carrito se muestra el texto "no hay productos en tu carrito" */
 const ACTUALIZAR_CARRITO = () => {
-    CONTENEDOR_CARRITO.innerHTML = ''
+    CONTENEDOR_CARRITO.innerHTML = '';
 
-    carrito.forEach( (SERVICIOS) => {
-        let {nombre, precio, id, cantidad = 1} = SERVICIOS;
+    carrito.forEach( (servicios) => {
+        let {nombre, precio, id, cantidad = 1} = servicios;
         
         let div = document.createElement('div');
         div.classList.add('producto-carrito');
@@ -143,10 +143,16 @@ const ACTUALIZAR_CARRITO = () => {
             <p>${nombre}</p>
             <p> Cantidad: ${cantidad} </p>
             <p>$ ${precio}</p>
-            <a onclick=ELIMINAR_SERVICIO(${id})><span class="iconify btn-eliminar" data-icon="bi:trash" data-inline="false"></span></a>
+            <a  id="eliminarServicio" onclick=ELIMINAR_SERVICIO(${id})><span class="iconify btn-eliminar" data-icon="bi:trash" data-inline="false"></span></a>
         `
         CONTENEDOR_CARRITO.appendChild(div)
     })
+
+    if(carrito.length > 0) {
+        BTN_ABRIR_CARRITO.addEventListener('click', () => {
+            CONTENEDOR_CARRITO_VACIO.classList.add('carrito-vacio-hide')
+        })
+    } 
     
     CONTADOR.innerText = carrito.length;
 
@@ -167,6 +173,12 @@ const ELIMINAR_SERVICIO = (id) => {
         div.innerHTML = `<p>No hay productos en tu carrito</p>`
         CONTENEDOR_CARRITO.appendChild(div)
     }
+
+    // if (carrito.length === 0) {
+    //     $('.modal-carrito').on("click", "#eliminarServicio", () => {
+    //         CONTENEDOR_CARRITO_VACIO.classList.remove('carrito-vacio-hide')
+    //     })
+    // }
 }
 
 // Evento para que al hacer clic sobre el icono carrito se abra el modal
@@ -188,3 +200,5 @@ MODAL_CARRITO.addEventListener('click', (e) => {
 BTN_CERRAR_CARRITO.addEventListener('click', () => {
     CONTENEDOR_MODAL.classList.remove('modal-activo')
 })
+
+

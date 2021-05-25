@@ -1,32 +1,6 @@
-import {CONTENEDOR_CHECKOUT, PRECIO_CHECKOUT, FORMULARIO_CHECKOUT, INPUTS} from './checkout.js';
+const FORMULARIO = document.getElementById('form');
+const INPUTS = document.querySelectorAll('#form input');
 
-// Mostrar productos en carrito
-let carrito = [];
-let carritoLocal = JSON.parse(localStorage.getItem('carrito'));
-carrito = [...carritoLocal]
-
-mostrarServicios(carrito);
-
-function mostrarServicios (array) {
-    CONTENEDOR_CHECKOUT.innerHTML = '';
-
-    array.forEach ( (servicio) => {
-        let article = document.createElement('article');
-        article.classList.add('checkout__item');
-        article.innerHTML += `
-            <h3>${servicio.nombre}</h3>
-            <p>${servicio.inclusiones}</p>
-            <p> Cantidad: ${servicio.cantidad} </p>
-            <p class="checkout__precio">$ ${servicio.precio}</p>
-            `
-
-        CONTENEDOR_CHECKOUT.appendChild(article);
-    })
-
-    PRECIO_CHECKOUT.innerText = carrito.reduce( (acc, el) => acc += el.precio, 0 )
-}
-
-// Validación form checkout con expresiones regulares
 const REGEX = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
 	email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -36,7 +10,7 @@ const REGEX = {
 const CAMPOS = {
     Fullname: false,
     Email: false,
-    Telephone: false
+    Telephone: false,
 }
 
 const VALIDAR_FORMULARIO = (e) => {
@@ -76,14 +50,27 @@ INPUTS.forEach( (input) => {
 	input.addEventListener('blur', VALIDAR_FORMULARIO);
 })
 
-FORMULARIO_CHECKOUT.addEventListener('submit', (e) => {
+FORMULARIO.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const TEXT_AREA = document.getElementById('textarea')
     const COMENTARIO = TEXT_AREA.value.trim(); 
 
     if(CAMPOS.Fullname && CAMPOS.Email && CAMPOS.Telephone && COMENTARIO != '') {
-        finalizarCompra();
+        FORMULARIO.reset();
+
+        document.getElementById('formSuccess').classList.add('form__message-success-active');
+        setTimeout( () => {
+            document.getElementById('formSuccess').classList.remove('form__message-success-active');
+        }, 4000);
+
+        document.querySelectorAll('.iconify').forEach((icono) => {
+            icono.classList.add('hidden');
+        });
+
+        document.querySelectorAll('.form__group').forEach((input) => {
+            input.classList.remove('form__group-right');
+        });
     } else {
         document.getElementById('formMessage').classList.add('form__message-active');
         setTimeout( () => {
@@ -91,41 +78,3 @@ FORMULARIO_CHECKOUT.addEventListener('submit', (e) => {
         }, 2000);
     }
 });
-
-// API MERCADO PAGO 
-async function finalizarCompra() {
-	const carritoFinal = carrito.map((element) => {
-		let nuevoElemento = {
-			title: element.title,
-			description: "",
-			picture_url: "",
-			category_id: element.id,
-			quantity: Number(element.cantidad),
-			currency_id: "ARS",
-			unit_price: Number(element.precio),
-		};
-		return nuevoElemento;
-	});
-	console.log(carritoFinal);
-
-    const response = await fetch (
-		"https://api.mercadopago.com/checkout/preferences",
-		{
-			method: "POST",
-			headers: {
-				Authorization: "Bearer TEST-5522414011847637-052422-7bf45f6741e66556e621ea815f134da2-214360281",
-			},
-			body: JSON.stringify({
-				items: carritoFinal,
-                "back_urls": {
-                    success: "http://127.0.0.1:5500/shop.html",
-                    failure: "http://127.0.0.1:5500/shop.html",
-                    pending: "http://127.0.0.1:5500/shop.html"
-                },
-                auto_return: "approved",
-			}),
-		}
-	);
-	const data = await response.json();
-	window.open(data.init_point, "_blank");
-}

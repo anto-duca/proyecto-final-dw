@@ -1,11 +1,13 @@
 $colors: (
     primary: #fffbb6,
     primary-light: lighten(#fffbb6, 7),
-    primary-dark: darken(#fffbb6, 25),
+    primary-dark: darken(#fffbb6, 10),
     accent: #4e287f,
     accent-light: lighten(#4e287f, 55),
     accent-dark: darken(#4e287f, 10),
     button: #ffffffea,
+    success: darken(#6BE8A2, 50),
+    failure: rgb(235, 121, 121),
 );
 
 $sections: (
