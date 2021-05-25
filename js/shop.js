@@ -16,7 +16,9 @@ CONTADOR.innerText = '0';
 // Función para imprimir los productos del local storage en el modal del carrito
 const LOCAL_STORAGE = () => {
     let carritoLocal = JSON.parse(localStorage.getItem('carrito'));
-    carrito = [...carritoLocal]
+    if (carritoLocal) {
+        carrito = [...carritoLocal]
+    }
     CONTADOR.innerText = carrito.length;
     ACTUALIZAR_CARRITO();
 }
