@@ -202,3 +202,7 @@ BTN_CERRAR_CARRITO.addEventListener('click', () => {
 })
 
 
+
+
+
+

@@ -82,7 +82,7 @@ FORMULARIO_CHECKOUT.addEventListener('submit', (e) => {
     const TEXT_AREA = document.getElementById('textarea')
     const COMENTARIO = TEXT_AREA.value.trim(); 
 
-    if(CAMPOS.Fullname && CAMPOS.Email && CAMPOS.Telephone && COMENTARIO != '') {
+    if(CAMPOS.Fullname && CAMPOS.Email && CAMPOS.Telephone) {
         finalizarCompra();
     } else {
         document.getElementById('formMessage').classList.add('form__message-active');
@@ -94,15 +94,15 @@ FORMULARIO_CHECKOUT.addEventListener('submit', (e) => {
 
 // API MERCADO PAGO 
 async function finalizarCompra() {
-	const carritoFinal = carrito.map((element) => {
+	const carritoFinal = carrito.map((e) => {
 		let nuevoElemento = {
-			title: element.title,
+			title: e.nombre,
 			description: "",
 			picture_url: "",
-			category_id: element.id,
-			quantity: Number(element.cantidad),
+			category_id: e.id,
+			quantity: Number(e.cantidad),
 			currency_id: "ARS",
-			unit_price: Number(element.precio),
+			unit_price: Number(e.precio),
 		};
 		return nuevoElemento;
 	});
@@ -128,4 +128,9 @@ async function finalizarCompra() {
 	);
 	const data = await response.json();
 	window.open(data.init_point, "_blank");
+
+    //vacia el carrito despues del checkout y lo refleja en localStorage
+    carrito = [];
+    localStorage.setItem('carrito', JSON.stringify(carrito));
 }
+
