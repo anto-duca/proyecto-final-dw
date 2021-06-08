@@ -93,7 +93,7 @@ FORMULARIO_CHECKOUT.addEventListener('submit', (e) => {
     }
 });
 
-// API MERCADO PAGO AL CLICKEAR PAGAR
+// API MERCADO PAGO, al clickear PAGAR.
 async function finalizarCompra() {
 	const carritoFinal = carrito.map((e) => {
 		let nuevoElemento = {
@@ -107,7 +107,6 @@ async function finalizarCompra() {
 		};
 		return nuevoElemento;
 	});
-	console.log(carritoFinal);
 
     const response = await fetch (
 		"https://api.mercadopago.com/checkout/preferences",
@@ -129,11 +128,12 @@ async function finalizarCompra() {
 	);
 	const data = await response.json();
 	window.open(data.init_point, "_blank");
-	window.location.replace('http://127.0.0.1:5500/shop.html');
-
+	
     //vacia el carrito despues del checkout y lo refleja en localStorage
     carrito = [];
     localStorage.setItem('carrito', JSON.stringify(carrito));
+	
+	window.location.replace('http://127.0.0.1:5500/shop.html');
 }
 
 /* Guardo los datos del usuario para mostrarlo en el mensaje de agradecimiento por la compra*/
