@@ -1,6 +1,7 @@
-// Creación de arrays CARRITO para el proceso de compra del usuario
+// Creación de array CARRITO para el proceso de compra del usuario
 let carrito = [];
 
+// Obtengo mediante clases o ID los elementos del HTML que necesito para el cart
 const BTN_ABRIR_CARRITO = document.getElementById('botonAbrir');
 const BTN_CERRAR_CARRITO = document.getElementById('carritoCerrar');
 const CONTENEDOR_MODAL = document.getElementsByClassName('modal-contenedor')[0];
